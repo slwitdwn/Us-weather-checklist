@@ -8,9 +8,9 @@
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg:#111827; --bg2:#151e38; --bg3:#172040;
-    --border:#1e2a50; --border2:#2a3060; --border3:#3a4880;
-    --text:#e2e8ff; --text2:#c8d4ff; --muted:#4a5899; --muted2:#6674cc;
+    --bg:#111d35; --bg2:#182340; --bg3:#1e2a4a;
+    --border:#263560; --border2:#324272; --border3:#4a5e9a;
+    --text:#eef2ff; --text2:#d4dcff; --muted:#6878b8; --muted2:#8a9dd4;
     --accent:#a5b4fc; --teal:#5eead4; --yellow:#fcd34d;
     --green:#4ade80; --red:#f87171;
   }
@@ -38,14 +38,19 @@
   .section-label { font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px 4px; }
   .city { margin-bottom:6px; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:var(--bg2); }
   .city.anchor { border-color:var(--border3); background:var(--bg3); }
-  .city-row { display:grid; grid-template-columns:100px 1fr 1fr 1fr 90px 68px; align-items:stretch; min-height:44px; }
+  .city-row { display:grid; grid-template-columns:100px 1fr 1fr 1fr 1fr 90px 68px; align-items:stretch; min-height:44px; }
   .city-name { display:flex; flex-direction:column; justify-content:center; padding:0 14px; font-size:11px; font-weight:500; letter-spacing:0.1em; color:var(--text2); border-right:1px solid var(--border); text-transform:uppercase; }
   .city-name small { font-size:9px; color:var(--muted); font-weight:400; margin-top:3px; }
   .city-name .anchor-tag { font-size:8px; color:var(--accent); font-weight:500; margin-top:3px; }
   .link-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); text-decoration:none; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; transition:background .1s; }
   .link-cell.poly { color:var(--accent); } .link-cell.poly:hover { background:#1e2a50; }
   .link-cell.afd { color:var(--teal); } .link-cell.afd:hover { background:#0f2028; }
-  .link-cell.hourly { color:var(--yellow); } .link-cell.hourly:hover { background:#201800; }
+  .link-cell.windy { color:#38bdf8; } .link-cell.windy:hover { background:#0a1e2e; }
+  .note-row { display:flex; align-items:center; border-top:1px solid var(--border); background:var(--bg); min-height:32px; }
+  .note-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:0 12px; white-space:nowrap; border-right:1px solid var(--border); min-width:100px; display:flex; align-items:center; height:32px; }
+  .note-input { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted2); background:transparent; border:none; outline:none; flex:1; padding:0 14px; height:32px; }
+  .note-input::placeholder { color:var(--muted); opacity:0.6; }
+  .note-input:focus { color:var(--text2); }
   .toggle-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); padding:4px; }
   .toggle { display:flex; border-radius:4px; overflow:hidden; border:1px solid var(--border2); }
   .toggle-opt { font-size:8px; font-weight:600; letter-spacing:0.06em; padding:5px 10px; cursor:pointer; border:none; background:transparent; color:var(--muted); font-family:'IBM Plex Mono',monospace; transition:background .1s,color .1s; }
@@ -54,13 +59,6 @@
   .toggle-opt:hover:not(.active) { color:var(--text2); }
   .open-all-cell { display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:9px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); transition:color .1s,background .1s; border:none; background:transparent; width:100%; height:100%; font-family:'IBM Plex Mono',monospace; }
   .open-all-cell:hover { color:var(--text2); background:#1e2a50; }
-  /* note row — only addition */
-  .city-note-row { display:flex; align-items:center; border-top:1px solid var(--border); min-height:30px; }
-  .note-prefix { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding:0 10px; border-right:1px solid var(--border); min-height:30px; display:flex; align-items:center; white-space:nowrap; }
-  .note-input { font-family:'IBM Plex Mono',monospace; font-size:10px; background:transparent; border:none; color:var(--text2); padding:6px 12px; flex:1; outline:none; letter-spacing:0.03em; }
-  .note-input::placeholder { color:var(--muted); font-size:9px; }
-  .note-input:focus { background:#111e38; }
-  /* end note row */
   .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
   .result-link { display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 8px; background:var(--bg2); border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted2); transition:background .1s,border-color .1s,color .1s; }
   .result-link:hover { background:#1e2a50; border-color:var(--border3); color:var(--text2); }
@@ -110,12 +108,12 @@
 </head>
 <body>
 <header><h1>Morning Research</h1><span id="clock"></span></header>
-
+ 
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('research',this)">Research</button>
   <button class="tab-btn" onclick="switchTab('tracker',this)">Tracker <span class="badge" id="trade-count">0</span></button>
 </div>
-
+ 
 <!-- TAB: RESEARCH -->
 <div class="tab-panel active" id="tab-research">
   <div class="yesterday-banner">
@@ -128,6 +126,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>Poly</div>
       <div class="legend-item"><div class="legend-dot" style="background:#5eead4"></div>AFD</div>
       <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div>Hourly</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Windy</div>
     </div>
     <div class="date-badge" id="date-display"></div>
   </div>
@@ -135,6 +134,8 @@
   <div id="cities-main"></div>
   <div class="section-label">US West</div>
   <div id="cities-west"></div>
+  <div class="section-label">Canada</div>
+  <div id="cities-canada"></div>
   <div class="section-label">Results — Weather Underground</div>
   <div class="results-grid" id="results-grid"></div>
   <div class="footer">
@@ -142,7 +143,7 @@
     <span class="footer-note" id="tab-count"></span>
   </div>
 </div>
-
+ 
 <!-- TAB: TRACKER -->
 <div class="tab-panel" id="tab-tracker">
   <div class="stats-row">
@@ -156,7 +157,7 @@
     <div class="form-grid">
       <div class="form-group"><label>Date</label><input type="date" id="f-date"></div>
       <div class="form-group"><label>City</label>
-        <select id="f-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option></select>
+        <select id="f-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option><option>San Fran</option><option>LA</option><option>Toronto</option></select>
       </div>
       <div class="form-group"><label>NWS High</label><input type="text" id="f-nws" placeholder="e.g. 76°F"></div>
     </div>
@@ -181,13 +182,13 @@
     <div class="empty" id="empty-state">No trades logged yet.</div>
   </div>
 </div>
-
+ 
 <!-- YESTERDAY MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3>Yesterday's Result</h3>
     <div class="mfield"><label>City</label>
-      <select id="yd-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option></select>
+      <select id="yd-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option><option>San Fran</option><option>LA</option><option>Toronto</option></select>
     </div>
     <div class="mfield"><label>Actual High (from WUnderground)</label><input type="text" id="yd-actual" placeholder="e.g. 42°F"></div>
     <div class="mfield"><label>Bucket resolved</label><input type="text" id="yd-bucket" placeholder="e.g. 42–43°F"></div>
@@ -200,49 +201,76 @@
     </div>
   </div>
 </div>
-
+ 
 <script>
 const citiesMain=[
   {name:"Chicago",polySlug:"chicago",anchor:true,
    afd:"https://forecast.weather.gov/product.php?site=NWS&issuedby=lot&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=41.9796&lon=-87.9045&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"41.980/-87.905",
    wund:"https://www.wunderground.com/history/daily/us/il/chicago/KORD"},
   {name:"Atlanta",polySlug:"atlanta",anchor:true,
    afd:"https://forecast.weather.gov/product.php?site=FFC&issuedby=FFC&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=33.6367&lon=-84.4279&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"33.637/-84.428",
    wund:"https://www.wunderground.com/history/daily/us/ga/atlanta/KATL"},
   {name:"Dallas",polySlug:"dallas",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=FWD&issuedby=FWD&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=32.8972&lon=-97.0377&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"32.897/-97.038",
    wund:"https://www.wunderground.com/history/daily/us/tx/dallas/KDFW"},
   {name:"NYC",polySlug:"nyc",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=OKX&issuedby=OKX&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=40.7761&lon=-73.8727&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"40.776/-73.873",
    wund:"https://www.wunderground.com/history/daily/us/ny/new-york-city/KLGA"},
   {name:"Miami",polySlug:"miami",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=MFL&issuedby=MFL&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=25.7959&lon=-80.2870&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"25.796/-80.287",
    wund:"https://www.wunderground.com/history/daily/us/fl/miami/KMIA"},
 ];
 const citiesWest=[
   {name:"Seattle",polySlug:"seattle",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=SEW&issuedby=SEW&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=47.4502&lon=-122.3088&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"47.450/-122.309",
    wund:"https://www.wunderground.com/history/daily/us/wa/seattle/KSEA"},
+  {name:"San Fran",polySlug:"san-francisco",anchor:false,
+   afd:"https://forecast.weather.gov/product.php?site=MTR&issuedby=MTR&product=AFD&format=CI&version=1&glossary=1",
+   hourly:"https://forecast.weather.gov/MapClick.php?lat=37.6213&lon=-122.3790&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"37.621/-122.379",
+   wund:"https://www.wunderground.com/history/daily/us/ca/san-francisco/KSFO"},
+  {name:"LA",polySlug:"los-angeles",anchor:false,
+   afd:"https://forecast.weather.gov/product.php?site=LOX&issuedby=LOX&product=AFD&format=CI&version=1&glossary=1",
+   hourly:"https://forecast.weather.gov/MapClick.php?lat=33.9425&lon=-118.4081&unit=0&lg=english&FcstType=graphical",
+   windyCoords:"33.943/-118.408",
+   wund:"https://www.wunderground.com/history/daily/us/ca/los-angeles/KLAX"},
 ];
-const allCities=[...citiesMain,...citiesWest];
-
+const citiesCanada=[
+  {name:"Toronto",polySlug:"toronto",anchor:false,
+   afd:"https://weather.gc.ca/forecast/public_bulletins_e.html?Bulletin=fpcn51.cwto",
+   hourly:"https://www.weather.gc.ca/en/forecast/hourly/index.html?coords=43.655,-79.383",
+   windyCoords:"43.677/-79.630",
+   wund:"https://www.wunderground.com/history/daily/ca/mississauga/CYYZ"},
+];
+const allCities=[...citiesMain,...citiesWest,...citiesCanada];
+ 
 function getSlug(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]}-${d.getDate()}-${d.getFullYear()}`;}
 function getDisplay(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;}
 function polyURL(slug,d){return`https://polymarket.com/event/highest-temperature-in-${slug}-on-${getSlug(d)}`;}
-
+function windyURL(coords,d){
+  const ds=d.toISOString().split('T')[0];
+  return`https://www.windy.com/multimodel/${coords}?temp,${ds},i:pressure,p:cities`;
+}
+ 
 function switchTab(name,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
 }
-
+ 
 function toggle(city,val){
   localStorage.setItem('tog_'+city,val);
   document.querySelectorAll('[data-city="'+city+'"] .toggle-opt').forEach(el=>{
@@ -250,59 +278,51 @@ function toggle(city,val){
     if(el.dataset.val===val)el.classList.add('active');
   });
 }
-
-function saveNote(city,val){
-  localStorage.setItem('note_'+city,val);
-}
-
+ 
 function renderCities(cities,id){
   const now=new Date();
   const c=document.getElementById(id);
   cities.forEach(city=>{
     const poly=polyURL(city.polySlug,now);
+    const windy=windyURL(city.windyCoords,now);
     const saved=localStorage.getItem('tog_'+city.name);
+    const note=localStorage.getItem('note_'+city.name)||'';
     const sa=saved==='skip'?' active':'', ta=saved==='trade'?' active':'';
     const ac=city.anchor?' anchor':'';
     const sub=city.anchor?'<span class="anchor-tag">★ anchor</span>':'<small>today</small>';
-    const savedNote=(localStorage.getItem('note_'+city.name)||'').replace(/"/g,'&quot;');
-    c.innerHTML+=`<div class="city${ac}">
-      <div class="city-row">
-        <div class="city-name">${city.name}${sub}</div>
-        <a class="link-cell poly" href="${poly}" target="_blank">Poly</a>
-        <a class="link-cell afd" href="${city.afd}" target="_blank">AFD</a>
-        <a class="link-cell hourly" href="${city.hourly}" target="_blank">Hourly</a>
-        <div class="toggle-cell" data-city="${city.name}"><div class="toggle">
-          <button class="toggle-opt skip${sa}" data-val="skip" onclick="toggle('${city.name}','skip')">Skip</button>
-          <button class="toggle-opt trade${ta}" data-val="trade" onclick="toggle('${city.name}','trade')">Trade</button>
-        </div></div>
-        <button class="open-all-cell" onclick="openAll(['${poly}','${city.afd}','${city.hourly}'])">All 3</button>
-      </div>
-      <div class="city-note-row">
-        <span class="note-prefix">note</span>
-        <input class="note-input" type="text"
-          placeholder="AFD read / confidence / reason…"
-          value="${savedNote}"
-          oninput="saveNote('${city.name}',this.value)"
-        />
-      </div>
-    </div>`;
+    c.innerHTML+=`<div class="city${ac}"><div class="city-row">
+      <div class="city-name">${city.name}${sub}</div>
+      <a class="link-cell poly" href="${poly}" target="_blank">Poly</a>
+      <a class="link-cell afd" href="${city.afd}" target="_blank">AFD</a>
+      <a class="link-cell hourly" href="${city.hourly}" target="_blank">Hourly</a>
+      <a class="link-cell windy" href="${windy}" target="_blank">Windy</a>
+      <div class="toggle-cell" data-city="${city.name}"><div class="toggle">
+        <button class="toggle-opt skip${sa}" data-val="skip" onclick="toggle('${city.name}','skip')">Skip</button>
+        <button class="toggle-opt trade${ta}" data-val="trade" onclick="toggle('${city.name}','trade')">Trade</button>
+      </div></div>
+      <button class="open-all-cell" onclick="openAll(['${poly}','${city.afd}','${city.hourly}','${windy}'])">All 4</button>
+    </div>
+    <div class="note-row">
+      <span class="note-label">Note</span>
+      <input class="note-input" type="text" placeholder="AFD read / confidence / reason…" value="${note.replace(/"/g,'&quot;')}" oninput="localStorage.setItem('note_${city.name}',this.value)">
+    </div></div>`;
   });
 }
-
+ 
 function renderResults(){
   const g=document.getElementById('results-grid');
   allCities.forEach(c=>{
     g.innerHTML+=`<a class="result-link" href="${c.wund}" target="_blank"><div class="dot"></div>${c.name}</a>`;
   });
 }
-
+ 
 function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
 function openEverything(){
   const now=new Date();
-  allCities.flatMap(c=>[polyURL(c.polySlug,now),c.afd,c.hourly])
+  allCities.flatMap(c=>[polyURL(c.polySlug,now),c.afd,c.hourly,windyURL(c.windyCoords,now)])
     .forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));
 }
-
+ 
 function openModal(){document.getElementById('modal').classList.add('open');}
 function closeModal(){document.getElementById('modal').classList.remove('open');}
 function saveYesterday(){
@@ -321,7 +341,7 @@ function renderYesterday(){
   const col=d.outcome==='win'?'#4ade80':d.outcome==='loss'?'#f87171':'#a5b4fc';
   el.innerHTML=`<span style="color:${col}">${d.outcome.toUpperCase()}</span> &nbsp;·&nbsp; ${d.city} &nbsp;·&nbsp; ${d.bucket||d.actual} &nbsp;·&nbsp; actual: ${d.actual}`;
 }
-
+ 
 function getTrades(){return JSON.parse(localStorage.getItem('trades')||'[]');}
 function saveTrades(t){localStorage.setItem('trades',JSON.stringify(t));}
 function addTrade(){
@@ -379,19 +399,20 @@ function updateStats(){
   el.className='stat-value '+(pnl>0?'green':pnl<0?'red':'');
 }
 function updateBadge(){document.getElementById('trade-count').textContent=getTrades().length;}
-
+ 
 const now=new Date();
 document.getElementById('date-display').textContent=getDisplay(now);
 document.getElementById('f-date').value=now.toISOString().split('T')[0];
 renderCities(citiesMain,'cities-main');
 renderCities(citiesWest,'cities-west');
+renderCities(citiesCanada,'cities-canada');
 renderResults();
 renderYesterday();
 renderTrades();
 updateStats();
 updateBadge();
-document.getElementById('tab-count').textContent=`${allCities.length*3} tabs total`;
-
+document.getElementById('tab-count').textContent=`${allCities.length*4} tabs total`;
+ 
 setInterval(()=>{
   document.getElementById('clock').textContent=
     new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
@@ -401,3 +422,4 @@ document.getElementById('clock').textContent=
 </script>
 </body>
 </html>
+ 
