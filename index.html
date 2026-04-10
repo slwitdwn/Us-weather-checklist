@@ -207,51 +207,51 @@ const citiesMain=[
   {name:"Chicago",polySlug:"chicago",anchor:true,
    afd:"https://forecast.weather.gov/product.php?site=NWS&issuedby=lot&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=41.9796&lon=-87.9045&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/41.876/-87.624?clouds,41.408,-87.624,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,41.876,-87.624,8",
    wund:"https://www.wunderground.com/history/daily/us/il/chicago/KORD"},
   {name:"Atlanta",polySlug:"atlanta",anchor:true,
    afd:"https://forecast.weather.gov/product.php?site=FFC&issuedby=FFC&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=33.6367&lon=-84.4279&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/33.749/-84.390?clouds,33.226,-84.390,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,33.749,-84.390,8",
    wund:"https://www.wunderground.com/history/daily/us/ga/atlanta/KATL"},
   {name:"Dallas",polySlug:"dallas",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=FWD&issuedby=FWD&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=32.8972&lon=-97.0377&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/32.776/-96.797?clouds,32.248,-96.797,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,32.776,-96.797,8",
    wund:"https://www.wunderground.com/history/daily/us/tx/dallas/KDFW"},
   {name:"NYC",polySlug:"nyc",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=OKX&issuedby=OKX&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=40.7761&lon=-73.8727&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/40.713/-74.006?clouds,40.185,-74.006,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,40.713,-74.006,8",
    wund:"https://www.wunderground.com/history/daily/us/ny/new-york-city/KLGA"},
   {name:"Miami",polySlug:"miami",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=MFL&issuedby=MFL&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=25.7959&lon=-80.2870&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/25.775/-80.209?clouds,25.247,-80.209,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,25.775,-80.209,8",
    wund:"https://www.wunderground.com/history/daily/us/fl/miami/KMIA"},
 ];
 const citiesWest=[
   {name:"Seattle",polySlug:"seattle",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=SEW&issuedby=SEW&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=47.4502&lon=-122.3088&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/47.606/-122.332?clouds,47.078,-122.332,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,47.606,-122.332,8",
    wund:"https://www.wunderground.com/history/daily/us/wa/seattle/KSEA"},
   {name:"San Fran",polySlug:"san-francisco",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=MTR&issuedby=MTR&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=37.6213&lon=-122.3790&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/37.775/-122.419?clouds,37.247,-122.419,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,37.775,-122.419,8",
    wund:"https://www.wunderground.com/history/daily/us/ca/san-francisco/KSFO"},
   {name:"LA",polySlug:"los-angeles",anchor:false,
    afd:"https://forecast.weather.gov/product.php?site=LOX&issuedby=LOX&product=AFD&format=CI&version=1&glossary=1",
    hourly:"https://forecast.weather.gov/MapClick.php?lat=33.9425&lon=-118.4081&unit=0&lg=english&FcstType=graphical",
-   windyURL:"https://www.windy.com/34.052/-118.244?clouds,33.524,-118.244,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,34.052,-118.244,8",
    wund:"https://www.wunderground.com/history/daily/us/ca/los-angeles/KLAX"},
 ];
 const citiesCanada=[
   {name:"Toronto",polySlug:"toronto",anchor:false,
    afd:"https://weather.gc.ca/forecast/public_bulletins_e.html?Bulletin=fpcn51.cwto",
    hourly:"https://www.weather.gc.ca/en/forecast/hourly/index.html?coords=43.655,-79.383",
-   windyURL:"https://www.windy.com/43.653/-79.383?clouds,43.125,-79.383,8,i:pressure,p:cities",
+   windy:"https://www.windy.com/?temp,43.653,-79.383,8",
    wund:"https://www.wunderground.com/history/daily/ca/mississauga/CYYZ"},
 ];
 const allCities=[...citiesMain,...citiesWest,...citiesCanada];
@@ -259,7 +259,6 @@ const allCities=[...citiesMain,...citiesWest,...citiesCanada];
 function getSlug(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]}-${d.getDate()}-${d.getFullYear()}`;}
 function getDisplay(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;}
 function polyURL(slug,d){return`https://polymarket.com/event/highest-temperature-in-${slug}-on-${getSlug(d)}`;}
-function windyURL(city){return city.windyURL;}
 
 function switchTab(name,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
@@ -281,7 +280,7 @@ function renderCities(cities,id){
   const c=document.getElementById(id);
   cities.forEach(city=>{
     const poly=polyURL(city.polySlug,now);
-    const windy=windyURL(city);
+    const windy=city.windy;
     const saved=localStorage.getItem('tog_'+city.name);
     const note=localStorage.getItem('note_'+city.name)||'';
     const sa=saved==='skip'?' active':'', ta=saved==='trade'?' active':'';
@@ -316,7 +315,7 @@ function renderResults(){
 function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
 function openEverything(){
   const now=new Date();
-  allCities.flatMap(c=>[polyURL(c.polySlug,now),c.afd,c.hourly,windyURL(c)])
+  allCities.flatMap(c=>[polyURL(c.polySlug,now),c.afd,c.hourly,c.windy])
     .forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));
 }
 
