@@ -12,7 +12,7 @@
     --border:#263560; --border2:#324272; --border3:#4a5e9a;
     --text:#eef2ff; --text2:#d4dcff; --muted:#6878b8; --muted2:#8a9dd4;
     --accent:#a5b4fc; --teal:#5eead4; --yellow:#fcd34d;
-    --green:#4ade80; --red:#f87171; --purple:#c084fc;
+    --green:#4ade80; --red:#f87171;
   }
   body { background:var(--bg); color:var(--text); font-family:'IBM Plex Mono',monospace; min-height:100vh; padding:32px 28px; max-width:800px; margin:0 auto; }
   header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border2); }
@@ -38,14 +38,13 @@
   .section-label { font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px 4px; }
   .city { margin-bottom:6px; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:var(--bg2); }
   .city.anchor { border-color:var(--border3); background:var(--bg3); }
-  /* 8 columns: name | poly-high | poly-low | afd | hourly | windy | toggle | all */
-  .city-row { display:grid; grid-template-columns:90px 1fr 1fr 1fr 1fr 1fr 90px 60px; align-items:stretch; min-height:44px; }
+  /* 7 columns: name | poly-high | afd | hourly | windy | toggle | all */
+  .city-row { display:grid; grid-template-columns:90px 1fr 1fr 1fr 1fr 90px 60px; align-items:stretch; min-height:44px; }
   .city-name { display:flex; flex-direction:column; justify-content:center; padding:0 10px; font-size:11px; font-weight:500; letter-spacing:0.08em; color:var(--text2); border-right:1px solid var(--border); text-transform:uppercase; }
   .city-name small { font-size:9px; color:var(--muted); font-weight:400; margin-top:3px; }
   .city-name .anchor-tag { font-size:8px; color:var(--accent); font-weight:500; margin-top:3px; }
   .link-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); text-decoration:none; font-size:9px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; transition:background .1s; }
-  .link-cell.poly-high { color:var(--accent); } .link-cell.poly-high:hover { background:#1e2a50; }
-  .link-cell.poly-low { color:var(--purple); } .link-cell.poly-low:hover { background:#1e1a40; }
+  .link-cell.poly { color:var(--accent); } .link-cell.poly:hover { background:#1e2a50; }
   .link-cell.afd { color:var(--teal); } .link-cell.afd:hover { background:#0f2028; }
   .link-cell.hourly { color:var(--yellow); } .link-cell.hourly:hover { background:#201a00; }
   .link-cell.windy { color:#38bdf8; } .link-cell.windy:hover { background:#0a1e2e; }
@@ -128,8 +127,7 @@
   </div>
   <div class="meta">
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>High</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div>Low</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>Poly</div>
       <div class="legend-item"><div class="legend-dot" style="background:#5eead4"></div>AFD</div>
       <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div>Hourly</div>
       <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Windy</div>
@@ -328,8 +326,7 @@ function renderCities(cities, id) {
       : '<small>today</small>';
     c.innerHTML += `<div class="city${ac}"><div class="city-row">
       <div class="city-name">${city.name}${sub}</div>
-      <a class="link-cell poly-high" href="${polyHigh}" target="_blank">High</a>
-      <a class="link-cell poly-low"  href="${polyLow}"  target="_blank">Low</a>
+      <a class="link-cell poly" href="${polyHigh}" target="_blank">Poly</a>
       <a class="link-cell afd"    href="${city.afd}"    target="_blank">AFD</a>
       <a class="link-cell hourly" href="${city.hourly}" target="_blank">Hourly</a>
       <a class="link-cell windy"  href="${city.windy}"  target="_blank">Windy</a>
@@ -337,7 +334,7 @@ function renderCities(cities, id) {
         <button class="toggle-opt skip${sa}"  data-val="skip"  onclick="toggle('${city.name}','skip')">Skip</button>
         <button class="toggle-opt trade${ta}" data-val="trade" onclick="toggle('${city.name}','trade')">Trade</button>
       </div></div>
-      <button class="open-all-cell" onclick="openAll(['${polyHigh}','${polyLow}','${city.afd}','${city.hourly}','${city.windy}'])">All 5</button>
+      <button class="open-all-cell" onclick="openAll(['${polyHigh}','${city.afd}','${city.hourly}','${city.windy}'])">All 4</button>
     </div>
     <div class="note-row">
       <span class="note-label">Note</span>
@@ -361,7 +358,7 @@ function openAll(urls) {
 
 function openEverything() {
   const now = new Date();
-  allCities.flatMap(c => [polyHighURL(c.polySlug, now), polyLowURL(c.polySlug, now), c.afd, c.hourly, c.windy])
+  allCities.flatMap(c => [polyHighURL(c.polySlug, now), c.afd, c.hourly, c.windy])
     .forEach((u, i) => setTimeout(() => window.open(u, '_blank'), i * 150));
 }
 
@@ -478,7 +475,7 @@ updateStats();
 updateBadge();
 
 // 5 links per city now (high + low + afd + hourly + windy)
-document.getElementById('tab-count').textContent = `${allCities.length * 5} tabs total`;
+document.getElementById('tab-count').textContent = `${allCities.length * 4} tabs total`;
 
 setInterval(() => {
   document.getElementById('clock').textContent =
