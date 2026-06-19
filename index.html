@@ -12,9 +12,9 @@
     --border:#263560; --border2:#324272; --border3:#4a5e9a;
     --text:#eef2ff; --text2:#d4dcff; --muted:#6878b8; --muted2:#8a9dd4;
     --accent:#a5b4fc; --teal:#5eead4; --yellow:#fcd34d;
-    --green:#4ade80; --red:#f87171;
+    --green:#4ade80; --red:#f87171; --purple:#c084fc;
   }
-  body { background:var(--bg); color:var(--text); font-family:'IBM Plex Mono',monospace; min-height:100vh; padding:32px 28px; max-width:720px; margin:0 auto; }
+  body { background:var(--bg); color:var(--text); font-family:'IBM Plex Mono',monospace; min-height:100vh; padding:32px 28px; max-width:800px; margin:0 auto; }
   header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border2); }
   h1 { font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); }
   #clock { font-size:13px; color:var(--muted2); letter-spacing:0.05em; }
@@ -31,33 +31,36 @@
   .yesterday-edit { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); background:transparent; border:1px solid var(--border2); padding:4px 10px; border-radius:3px; cursor:pointer; white-space:nowrap; transition:color .1s,border-color .1s; }
   .yesterday-edit:hover { color:var(--text2); border-color:var(--muted2); }
   .meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-  .legend { display:flex; gap:16px; }
+  .legend { display:flex; gap:12px; flex-wrap:wrap; }
   .legend-item { display:flex; align-items:center; gap:6px; font-size:10px; color:var(--muted2); letter-spacing:0.06em; }
   .legend-dot { width:6px; height:6px; border-radius:50%; }
-  .date-badge { font-size:10px; color:var(--accent); letter-spacing:0.06em; background:#1a2240; border:1px solid var(--border2); padding:4px 10px; border-radius:4px; }
+  .date-badge { font-size:10px; color:var(--accent); letter-spacing:0.06em; background:#1a2240; border:1px solid var(--border2); padding:4px 10px; border-radius:4px; white-space:nowrap; }
   .section-label { font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px 4px; }
   .city { margin-bottom:6px; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:var(--bg2); }
   .city.anchor { border-color:var(--border3); background:var(--bg3); }
-  .city-row { display:grid; grid-template-columns:100px 1fr 1fr 1fr 1fr 90px 68px; align-items:stretch; min-height:44px; }
-  .city-name { display:flex; flex-direction:column; justify-content:center; padding:0 14px; font-size:11px; font-weight:500; letter-spacing:0.1em; color:var(--text2); border-right:1px solid var(--border); text-transform:uppercase; }
+  /* 8 columns: name | poly-high | poly-low | afd | hourly | windy | toggle | all */
+  .city-row { display:grid; grid-template-columns:90px 1fr 1fr 1fr 1fr 1fr 90px 60px; align-items:stretch; min-height:44px; }
+  .city-name { display:flex; flex-direction:column; justify-content:center; padding:0 10px; font-size:11px; font-weight:500; letter-spacing:0.08em; color:var(--text2); border-right:1px solid var(--border); text-transform:uppercase; }
   .city-name small { font-size:9px; color:var(--muted); font-weight:400; margin-top:3px; }
   .city-name .anchor-tag { font-size:8px; color:var(--accent); font-weight:500; margin-top:3px; }
-  .link-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); text-decoration:none; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; transition:background .1s; }
-  .link-cell.poly { color:var(--accent); } .link-cell.poly:hover { background:#1e2a50; }
+  .link-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); text-decoration:none; font-size:9px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; transition:background .1s; }
+  .link-cell.poly-high { color:var(--accent); } .link-cell.poly-high:hover { background:#1e2a50; }
+  .link-cell.poly-low { color:var(--purple); } .link-cell.poly-low:hover { background:#1e1a40; }
   .link-cell.afd { color:var(--teal); } .link-cell.afd:hover { background:#0f2028; }
+  .link-cell.hourly { color:var(--yellow); } .link-cell.hourly:hover { background:#201a00; }
   .link-cell.windy { color:#38bdf8; } .link-cell.windy:hover { background:#0a1e2e; }
   .note-row { display:flex; align-items:center; border-top:1px solid var(--border); background:var(--bg); min-height:32px; }
-  .note-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:0 12px; white-space:nowrap; border-right:1px solid var(--border); min-width:100px; display:flex; align-items:center; height:32px; }
+  .note-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:0 12px; white-space:nowrap; border-right:1px solid var(--border); min-width:90px; display:flex; align-items:center; height:32px; }
   .note-input { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted2); background:transparent; border:none; outline:none; flex:1; padding:0 14px; height:32px; }
   .note-input::placeholder { color:var(--muted); opacity:0.6; }
   .note-input:focus { color:var(--text2); }
   .toggle-cell { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); padding:4px; }
   .toggle { display:flex; border-radius:4px; overflow:hidden; border:1px solid var(--border2); }
-  .toggle-opt { font-size:8px; font-weight:600; letter-spacing:0.06em; padding:5px 10px; cursor:pointer; border:none; background:transparent; color:var(--muted); font-family:'IBM Plex Mono',monospace; transition:background .1s,color .1s; }
+  .toggle-opt { font-size:8px; font-weight:600; letter-spacing:0.06em; padding:5px 8px; cursor:pointer; border:none; background:transparent; color:var(--muted); font-family:'IBM Plex Mono',monospace; transition:background .1s,color .1s; }
   .toggle-opt.skip.active { background:#2a1a1a; color:var(--red); }
   .toggle-opt.trade.active { background:#0f2a1a; color:var(--green); }
   .toggle-opt:hover:not(.active) { color:var(--text2); }
-  .open-all-cell { display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:9px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); transition:color .1s,background .1s; border:none; background:transparent; width:100%; height:100%; font-family:'IBM Plex Mono',monospace; }
+  .open-all-cell { display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:9px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); transition:color .1s,background .1s; border:none; background:transparent; width:100%; height:100%; font-family:'IBM Plex Mono',monospace; }
   .open-all-cell:hover { color:var(--text2); background:#1e2a50; }
   .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
   .result-link { display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 8px; background:var(--bg2); border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted2); transition:background .1s,border-color .1s,color .1s; }
@@ -67,6 +70,7 @@
   .open-everything { font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text2); background:#1a2240; border:1px solid var(--border3); padding:10px 20px; cursor:pointer; border-radius:4px; transition:background .12s,border-color .12s; }
   .open-everything:hover { background:#202a50; border-color:var(--muted2); }
   .footer-note { font-size:10px; color:var(--muted); letter-spacing:0.04em; }
+  /* TRACKER */
   .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
   .stat-box { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:12px 14px; }
   .stat-label { font-size:8px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
@@ -93,6 +97,7 @@
   .del-btn { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); background:transparent; border:none; cursor:pointer; padding:2px 6px; border-radius:3px; transition:color .1s,background .1s; }
   .del-btn:hover { color:var(--red); background:#2a1a1a; }
   .empty { text-align:center; padding:32px; color:var(--muted); font-size:10px; letter-spacing:0.08em; }
+  /* MODAL */
   .modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,12,25,.85); z-index:100; align-items:center; justify-content:center; }
   .modal-overlay.open { display:flex; }
   .modal { background:var(--bg2); border:1px solid var(--border3); border-radius:8px; padding:24px; width:340px; max-width:90vw; }
@@ -108,12 +113,12 @@
 </head>
 <body>
 <header><h1>Morning Research</h1><span id="clock"></span></header>
- 
+
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('research',this)">Research</button>
   <button class="tab-btn" onclick="switchTab('tracker',this)">Tracker <span class="badge" id="trade-count">0</span></button>
 </div>
- 
+
 <!-- TAB: RESEARCH -->
 <div class="tab-panel active" id="tab-research">
   <div class="yesterday-banner">
@@ -123,7 +128,8 @@
   </div>
   <div class="meta">
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>Poly</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>High</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div>Low</div>
       <div class="legend-item"><div class="legend-dot" style="background:#5eead4"></div>AFD</div>
       <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div>Hourly</div>
       <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Windy</div>
@@ -143,7 +149,7 @@
     <span class="footer-note" id="tab-count"></span>
   </div>
 </div>
- 
+
 <!-- TAB: TRACKER -->
 <div class="tab-panel" id="tab-tracker">
   <div class="stats-row">
@@ -157,17 +163,24 @@
     <div class="form-grid">
       <div class="form-group"><label>Date</label><input type="date" id="f-date"></div>
       <div class="form-group"><label>City</label>
-        <select id="f-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option><option>San Fran</option><option>LA</option><option>Toronto</option></select>
+        <select id="f-city">
+          <option>Chicago</option><option>Atlanta</option><option>Dallas</option>
+          <option>NYC</option><option>Miami</option><option>Seattle</option>
+          <option>San Fran</option><option>LA</option><option>Toronto</option>
+        </select>
       </div>
-      <div class="form-group"><label>NWS High</label><input type="text" id="f-nws" placeholder="e.g. 76°F"></div>
+      <div class="form-group"><label>Market</label>
+        <select id="f-market"><option value="high">Highest Temp</option><option value="low">Lowest Temp</option></select>
+      </div>
     </div>
     <div class="form-grid">
+      <div class="form-group"><label>NWS Forecast</label><input type="text" id="f-nws" placeholder="e.g. 76°F"></div>
       <div class="form-group"><label>Bucket</label><input type="text" id="f-bucket" placeholder="e.g. 76–77°F"></div>
       <div class="form-group"><label>Entry ¢</label><input type="number" id="f-entry" placeholder="e.g. 16.7" step="0.1"></div>
-      <div class="form-group"><label>Size $</label><input type="number" id="f-size" placeholder="e.g. 20"></div>
     </div>
-    <div class="form-row2">
-      <div class="form-group"><label>Exit ¢ (blank if open)</label><input type="number" id="f-exit" placeholder="e.g. 42.0" step="0.1"></div>
+    <div class="form-grid">
+      <div class="form-group"><label>Size $</label><input type="number" id="f-size" placeholder="e.g. 20"></div>
+      <div class="form-group"><label>Exit ¢ (blank=open)</label><input type="number" id="f-exit" placeholder="e.g. 42.0" step="0.1"></div>
       <div class="form-group"><label>Outcome</label>
         <select id="f-outcome"><option value="open">Open</option><option value="win">Win</option><option value="loss">Loss</option><option value="skip">Skip</option></select>
       </div>
@@ -176,21 +189,28 @@
   </div>
   <div class="trade-table-wrap">
     <table class="trade-table">
-      <thead><tr><th>Date</th><th>City</th><th>NWS</th><th>Bucket</th><th>Entry</th><th>Exit</th><th>Size</th><th>P&amp;L</th><th>Result</th><th></th></tr></thead>
+      <thead><tr><th>Date</th><th>City</th><th>Mkt</th><th>NWS</th><th>Bucket</th><th>Entry</th><th>Exit</th><th>Size</th><th>P&amp;L</th><th>Result</th><th></th></tr></thead>
       <tbody id="trade-tbody"></tbody>
     </table>
     <div class="empty" id="empty-state">No trades logged yet.</div>
   </div>
 </div>
- 
+
 <!-- YESTERDAY MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3>Yesterday's Result</h3>
     <div class="mfield"><label>City</label>
-      <select id="yd-city"><option>Chicago</option><option>Atlanta</option><option>Dallas</option><option>NYC</option><option>Miami</option><option>Seattle</option><option>San Fran</option><option>LA</option><option>Toronto</option></select>
+      <select id="yd-city">
+        <option>Chicago</option><option>Atlanta</option><option>Dallas</option>
+        <option>NYC</option><option>Miami</option><option>Seattle</option>
+        <option>San Fran</option><option>LA</option><option>Toronto</option>
+      </select>
     </div>
-    <div class="mfield"><label>Actual High (from WUnderground)</label><input type="text" id="yd-actual" placeholder="e.g. 42°F"></div>
+    <div class="mfield"><label>Market</label>
+      <select id="yd-market"><option value="high">Highest Temp</option><option value="low">Lowest Temp</option></select>
+    </div>
+    <div class="mfield"><label>Actual (from WUnderground)</label><input type="text" id="yd-actual" placeholder="e.g. 42°F"></div>
     <div class="mfield"><label>Bucket resolved</label><input type="text" id="yd-bucket" placeholder="e.g. 42–43°F"></div>
     <div class="mfield"><label>Your outcome</label>
       <select id="yd-outcome"><option value="skip">Skipped</option><option value="win">Win</option><option value="loss">Loss</option></select>
@@ -201,220 +221,271 @@
     </div>
   </div>
 </div>
- 
+
 <script>
-const citiesMain=[
-  {name:"Chicago",polySlug:"chicago",anchor:true,
-   afd:"https://forecast.weather.gov/product.php?site=NWS&issuedby=lot&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=41.9796&lon=-87.9045&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/41.979/-87.908?temp,41.512,-87.908,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/il/chicago/KORD"},
-  {name:"Atlanta",polySlug:"atlanta",anchor:true,
-   afd:"https://forecast.weather.gov/product.php?site=FFC&issuedby=FFC&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=33.6367&lon=-84.4279&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/33.638/-84.428?temp,33.116,-84.428,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/ga/atlanta/KATL"},
-  {name:"Dallas",polySlug:"dallas",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=FWD&issuedby=FWD&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=32.8972&lon=-97.0377&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/32.846/-96.850?temp,32.319,-96.850,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/tx/dallas/KDFW"},
-  {name:"NYC",polySlug:"nyc",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=OKX&issuedby=OKX&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=40.7761&lon=-73.8727&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/40.775/-73.873?temp,40.300,-73.873,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/ny/new-york-city/KLGA"},
-  {name:"Miami",polySlug:"miami",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=MFL&issuedby=MFL&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=25.7959&lon=-80.2870&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/25.796/-80.288?temp,25.231,-80.288,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/fl/miami/KMIA"},
+const citiesMain = [
+  { name:"Chicago",  polySlug:"chicago",       anchor:true,
+    afd:"https://forecast.weather.gov/product.php?site=NWS&issuedby=lot&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=41.9796&lon=-87.9045&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/41.979/-87.908?temp,41.512,-87.908,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/il/chicago/KORD" },
+  { name:"Atlanta",  polySlug:"atlanta",        anchor:true,
+    afd:"https://forecast.weather.gov/product.php?site=FFC&issuedby=FFC&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=33.6367&lon=-84.4279&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/33.638/-84.428?temp,33.116,-84.428,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/ga/atlanta/KATL" },
+  { name:"Dallas",   polySlug:"dallas",         anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=FWD&issuedby=FWD&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=32.8972&lon=-97.0377&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/32.846/-96.850?temp,32.319,-96.850,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/tx/dallas/KDFW" },
+  { name:"NYC",      polySlug:"nyc",            anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=OKX&issuedby=OKX&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=40.7761&lon=-73.8727&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/40.775/-73.873?temp,40.300,-73.873,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/ny/new-york-city/KLGA" },
+  { name:"Miami",    polySlug:"miami",          anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=MFL&issuedby=MFL&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=25.7959&lon=-80.2870&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/25.796/-80.288?temp,25.231,-80.288,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/fl/miami/KMIA" },
 ];
-const citiesWest=[
-  {name:"Seattle",polySlug:"seattle",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=SEW&issuedby=SEW&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=47.4502&lon=-122.3088&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/-Temperature-temp?temp,47.025,-122.309,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/wa/seattle/KSEA"},
-  {name:"San Fran",polySlug:"san-francisco",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=MTR&issuedby=MTR&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=37.6213&lon=-122.3790&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/37.621/-122.383?temp,37.124,-122.383,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/ca/san-francisco/KSFO"},
-  {name:"LA",polySlug:"los-angeles",anchor:false,
-   afd:"https://forecast.weather.gov/product.php?site=LOX&issuedby=LOX&product=AFD&format=CI&version=1&glossary=1",
-   hourly:"https://forecast.weather.gov/MapClick.php?lat=33.9425&lon=-118.4081&unit=0&lg=english&FcstType=graphical",
-   windy:"https://www.windy.com/33.942/-118.410?temp,33.421,-118.410,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/us/ca/los-angeles/KLAX"},
+const citiesWest = [
+  { name:"Seattle",  polySlug:"seattle",        anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=SEW&issuedby=SEW&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=47.4502&lon=-122.3088&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/47.451/-122.309?temp,47.025,-122.309,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/wa/seattle/KSEA" },
+  { name:"San Fran", polySlug:"san-francisco",  anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=MTR&issuedby=MTR&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=37.6213&lon=-122.3790&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/37.621/-122.383?temp,37.124,-122.383,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/ca/san-francisco/KSFO" },
+  { name:"LA",       polySlug:"los-angeles",    anchor:false,
+    afd:"https://forecast.weather.gov/product.php?site=LOX&issuedby=LOX&product=AFD&format=CI&version=1&glossary=1",
+    hourly:"https://forecast.weather.gov/MapClick.php?lat=33.9425&lon=-118.4081&unit=0&lg=english&FcstType=graphical",
+    windy:"https://www.windy.com/33.942/-118.410?temp,33.421,-118.410,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/us/ca/los-angeles/KLAX" },
 ];
-const citiesCanada=[
-  {name:"Toronto",polySlug:"toronto",anchor:false,
-   afd:"https://weather.gc.ca/forecast/public_bulletins_e.html?Bulletin=fpcn51.cwto",
-   hourly:"https://www.weather.gc.ca/en/forecast/hourly/index.html?coords=43.655,-79.383",
-   windy:"https://www.windy.com/43.678/-79.629?temp,43.224,-79.629,8,i:pressure,p:cities",
-   wund:"https://www.wunderground.com/history/daily/ca/mississauga/CYYZ"},
+const citiesCanada = [
+  { name:"Toronto",  polySlug:"toronto",        anchor:false,
+    afd:"https://weather.gc.ca/forecast/public_bulletins_e.html?Bulletin=fpcn51.cwto",
+    hourly:"https://www.weather.gc.ca/en/forecast/hourly/index.html?coords=43.655,-79.383",
+    windy:"https://www.windy.com/43.678/-79.629?temp,43.224,-79.629,8,i:pressure,p:cities",
+    wund:"https://www.wunderground.com/history/daily/ca/mississauga/CYYZ" },
 ];
-const allCities=[...citiesMain,...citiesWest,...citiesCanada];
- 
-function getSlug(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]}-${d.getDate()}-${d.getFullYear()}`;}
-function getDisplay(d){const m=['january','february','march','april','may','june','july','august','september','october','november','december'];return`${m[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;}
-function polyURL(slug,d){return`https://polymarket.com/event/highest-temperature-in-${slug}-on-${getSlug(d)}`;}
- 
-function switchTab(name,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
+const allCities = [...citiesMain, ...citiesWest, ...citiesCanada];
+
+// Polymarket date format: "june-18-2026"
+function getPolyDate(d) {
+  const months = ['january','february','march','april','may','june',
+                  'july','august','september','october','november','december'];
+  return `${months[d.getMonth()]}-${d.getDate()}-${d.getFullYear()}`;
+}
+
+// Display date format
+function getDisplay(d) {
+  const months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+  return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+function polyHighURL(slug, d) {
+  return `https://polymarket.com/event/highest-temperature-in-${slug}-on-${getPolyDate(d)}`;
+}
+function polyLowURL(slug, d) {
+  return `https://polymarket.com/event/lowest-temperature-in-${slug}-on-${getPolyDate(d)}`;
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
 }
- 
-function toggle(city,val){
-  localStorage.setItem('tog_'+city,val);
-  document.querySelectorAll('[data-city="'+city+'"] .toggle-opt').forEach(el=>{
+
+function toggle(city, val) {
+  localStorage.setItem('tog_' + city, val);
+  document.querySelectorAll('[data-city="' + city + '"] .toggle-opt').forEach(el => {
     el.classList.remove('active');
-    if(el.dataset.val===val)el.classList.add('active');
+    if (el.dataset.val === val) el.classList.add('active');
   });
 }
- 
-function renderCities(cities,id){
-  const now=new Date();
-  const c=document.getElementById(id);
-  cities.forEach(city=>{
-    const poly=polyURL(city.polySlug,now);
-    const windy=city.windy;
-    const saved=localStorage.getItem('tog_'+city.name);
-    const note=localStorage.getItem('note_'+city.name)||'';
-    const sa=saved==='skip'?' active':'', ta=saved==='trade'?' active':'';
-    const ac=city.anchor?' anchor':'';
-    const sub=city.anchor?'<span class="anchor-tag">★ anchor</span>':'<small>today</small>';
-    c.innerHTML+=`<div class="city${ac}"><div class="city-row">
+
+function renderCities(cities, id) {
+  const now = new Date();
+  const c = document.getElementById(id);
+  cities.forEach(city => {
+    const polyHigh = polyHighURL(city.polySlug, now);
+    const polyLow  = polyLowURL(city.polySlug, now);
+    const saved = localStorage.getItem('tog_' + city.name);
+    const note  = localStorage.getItem('note_' + city.name) || '';
+    const sa = saved === 'skip'  ? ' active' : '';
+    const ta = saved === 'trade' ? ' active' : '';
+    const ac = city.anchor ? ' anchor' : '';
+    const sub = city.anchor
+      ? '<span class="anchor-tag">★ anchor</span>'
+      : '<small>today</small>';
+    c.innerHTML += `<div class="city${ac}"><div class="city-row">
       <div class="city-name">${city.name}${sub}</div>
-      <a class="link-cell poly" href="${poly}" target="_blank">Poly</a>
-      <a class="link-cell afd" href="${city.afd}" target="_blank">AFD</a>
+      <a class="link-cell poly-high" href="${polyHigh}" target="_blank">High</a>
+      <a class="link-cell poly-low"  href="${polyLow}"  target="_blank">Low</a>
+      <a class="link-cell afd"    href="${city.afd}"    target="_blank">AFD</a>
       <a class="link-cell hourly" href="${city.hourly}" target="_blank">Hourly</a>
-      <a class="link-cell windy" href="${windy}" target="_blank">Windy</a>
+      <a class="link-cell windy"  href="${city.windy}"  target="_blank">Windy</a>
       <div class="toggle-cell" data-city="${city.name}"><div class="toggle">
-        <button class="toggle-opt skip${sa}" data-val="skip" onclick="toggle('${city.name}','skip')">Skip</button>
+        <button class="toggle-opt skip${sa}"  data-val="skip"  onclick="toggle('${city.name}','skip')">Skip</button>
         <button class="toggle-opt trade${ta}" data-val="trade" onclick="toggle('${city.name}','trade')">Trade</button>
       </div></div>
-      <button class="open-all-cell" onclick="openAll(['${poly}','${city.afd}','${city.hourly}','${windy}'])">All 4</button>
+      <button class="open-all-cell" onclick="openAll(['${polyHigh}','${polyLow}','${city.afd}','${city.hourly}','${city.windy}'])">All 5</button>
     </div>
     <div class="note-row">
       <span class="note-label">Note</span>
-      <input class="note-input" type="text" placeholder="AFD read / confidence / reason…" value="${note.replace(/"/g,'&quot;')}" oninput="localStorage.setItem('note_${city.name}',this.value)">
+      <input class="note-input" type="text" placeholder="AFD read / confidence / reason…"
+        value="${note.replace(/"/g, '&quot;')}"
+        oninput="localStorage.setItem('note_${city.name}', this.value)">
     </div></div>`;
   });
 }
- 
-function renderResults(){
-  const g=document.getElementById('results-grid');
-  allCities.forEach(c=>{
-    g.innerHTML+=`<a class="result-link" href="${c.wund}" target="_blank"><div class="dot"></div>${c.name}</a>`;
+
+function renderResults() {
+  const g = document.getElementById('results-grid');
+  allCities.forEach(c => {
+    g.innerHTML += `<a class="result-link" href="${c.wund}" target="_blank"><div class="dot"></div>${c.name}</a>`;
   });
 }
- 
-function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
-function openEverything(){
-  const now=new Date();
-  allCities.flatMap(c=>[polyURL(c.polySlug,now),c.afd,c.hourly,c.windy])
-    .forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));
+
+function openAll(urls) {
+  urls.forEach((u, i) => setTimeout(() => window.open(u, '_blank'), i * 150));
 }
- 
-function openModal(){document.getElementById('modal').classList.add('open');}
-function closeModal(){document.getElementById('modal').classList.remove('open');}
-function saveYesterday(){
-  const d={city:document.getElementById('yd-city').value,
-    actual:document.getElementById('yd-actual').value,
-    bucket:document.getElementById('yd-bucket').value,
-    outcome:document.getElementById('yd-outcome').value};
-  localStorage.setItem('yesterday',JSON.stringify(d));
-  renderYesterday(); closeModal();
+
+function openEverything() {
+  const now = new Date();
+  allCities.flatMap(c => [polyHighURL(c.polySlug, now), polyLowURL(c.polySlug, now), c.afd, c.hourly, c.windy])
+    .forEach((u, i) => setTimeout(() => window.open(u, '_blank'), i * 150));
 }
-function renderYesterday(){
-  const raw=localStorage.getItem('yesterday');
-  const el=document.getElementById('yd-display');
-  if(!raw){el.innerHTML='— tap edit to log result';return;}
-  const d=JSON.parse(raw);
-  const col=d.outcome==='win'?'#4ade80':d.outcome==='loss'?'#f87171':'#a5b4fc';
-  el.innerHTML=`<span style="color:${col}">${d.outcome.toUpperCase()}</span> &nbsp;·&nbsp; ${d.city} &nbsp;·&nbsp; ${d.bucket||d.actual} &nbsp;·&nbsp; actual: ${d.actual}`;
+
+function openModal()  { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function saveYesterday() {
+  const d = {
+    city:    document.getElementById('yd-city').value,
+    market:  document.getElementById('yd-market').value,
+    actual:  document.getElementById('yd-actual').value,
+    bucket:  document.getElementById('yd-bucket').value,
+    outcome: document.getElementById('yd-outcome').value
+  };
+  localStorage.setItem('yesterday', JSON.stringify(d));
+  renderYesterday();
+  closeModal();
 }
- 
-function getTrades(){return JSON.parse(localStorage.getItem('trades')||'[]');}
-function saveTrades(t){localStorage.setItem('trades',JSON.stringify(t));}
-function addTrade(){
-  const date=document.getElementById('f-date').value;
-  const city=document.getElementById('f-city').value;
-  const nws=document.getElementById('f-nws').value;
-  const bucket=document.getElementById('f-bucket').value;
-  const entry=parseFloat(document.getElementById('f-entry').value);
-  const exitV=document.getElementById('f-exit').value;
-  const size=parseFloat(document.getElementById('f-size').value);
-  const outcome=document.getElementById('f-outcome').value;
-  if(!date||!bucket||isNaN(entry)){alert('Date, Bucket and Entry are required.');return;}
-  const exit=exitV?parseFloat(exitV):null;
-  let pnl=null;
-  if(exit!==null&&!isNaN(size)){const shares=(size*100)/entry;pnl=((exit-entry)/100)*shares;}
-  const trades=getTrades();
-  trades.unshift({id:Date.now(),date,city,nws,bucket,entry,exit,size:isNaN(size)?null:size,pnl,outcome});
-  saveTrades(trades);renderTrades();updateStats();updateBadge();
-  ['f-nws','f-bucket','f-entry','f-exit','f-size'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-outcome').value='open';
+
+function renderYesterday() {
+  const raw = localStorage.getItem('yesterday');
+  const el  = document.getElementById('yd-display');
+  if (!raw) { el.innerHTML = '— tap edit to log result'; return; }
+  const d = JSON.parse(raw);
+  const col = d.outcome === 'win' ? '#4ade80' : d.outcome === 'loss' ? '#f87171' : '#a5b4fc';
+  const mkt = d.market === 'low' ? 'LOW' : 'HIGH';
+  el.innerHTML = `<span style="color:${col}">${d.outcome.toUpperCase()}</span> &nbsp;·&nbsp; ${d.city} ${mkt} &nbsp;·&nbsp; ${d.bucket || d.actual} &nbsp;·&nbsp; actual: ${d.actual}`;
 }
-function deleteTrade(id){
-  saveTrades(getTrades().filter(t=>t.id!==id));
-  renderTrades();updateStats();updateBadge();
+
+// ── TRACKER ──────────────────────────────────────────────
+function getTrades()     { return JSON.parse(localStorage.getItem('trades') || '[]'); }
+function saveTrades(t)   { localStorage.setItem('trades', JSON.stringify(t)); }
+
+function addTrade() {
+  const date    = document.getElementById('f-date').value;
+  const city    = document.getElementById('f-city').value;
+  const market  = document.getElementById('f-market').value;
+  const nws     = document.getElementById('f-nws').value;
+  const bucket  = document.getElementById('f-bucket').value;
+  const entry   = parseFloat(document.getElementById('f-entry').value);
+  const exitV   = document.getElementById('f-exit').value;
+  const size    = parseFloat(document.getElementById('f-size').value);
+  const outcome = document.getElementById('f-outcome').value;
+  if (!date || !bucket || isNaN(entry)) { alert('Date, Bucket and Entry are required.'); return; }
+  const exit = exitV ? parseFloat(exitV) : null;
+  let pnl = null;
+  if (exit !== null && !isNaN(size)) {
+    const shares = (size * 100) / entry;
+    pnl = ((exit - entry) / 100) * shares;
+  }
+  const trades = getTrades();
+  trades.unshift({ id: Date.now(), date, city, market, nws, bucket, entry, exit, size: isNaN(size) ? null : size, pnl, outcome });
+  saveTrades(trades);
+  renderTrades(); updateStats(); updateBadge();
+  ['f-nws','f-bucket','f-entry','f-exit','f-size'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-outcome').value = 'open';
 }
-function renderTrades(){
-  const trades=getTrades();
-  const tbody=document.getElementById('trade-tbody');
-  document.getElementById('empty-state').style.display=trades.length?'none':'block';
-  tbody.innerHTML='';
-  trades.forEach(t=>{
-    const oc=t.outcome==='win'?'win':t.outcome==='loss'?'loss':'open-tag';
-    const pStr=t.pnl!==null?`${t.pnl>=0?'+':''}$${t.pnl.toFixed(2)}`:'—';
-    const pc=t.pnl>0?'win':t.pnl<0?'loss':'';
-    tbody.innerHTML+=`<tr>
-      <td>${t.date}</td><td>${t.city}</td><td>${t.nws||'—'}</td><td>${t.bucket}</td>
-      <td>${t.entry}¢</td><td>${t.exit!=null?t.exit+'¢':'—'}</td>
-      <td>${t.size?'$'+t.size:'—'}</td>
+
+function deleteTrade(id) {
+  saveTrades(getTrades().filter(t => t.id !== id));
+  renderTrades(); updateStats(); updateBadge();
+}
+
+function renderTrades() {
+  const trades = getTrades();
+  const tbody  = document.getElementById('trade-tbody');
+  document.getElementById('empty-state').style.display = trades.length ? 'none' : 'block';
+  tbody.innerHTML = '';
+  trades.forEach(t => {
+    const oc   = t.outcome === 'win' ? 'win' : t.outcome === 'loss' ? 'loss' : 'open-tag';
+    const pStr = t.pnl !== null ? `${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(2)}` : '—';
+    const pc   = t.pnl > 0 ? 'win' : t.pnl < 0 ? 'loss' : '';
+    const mkt  = t.market === 'low' ? 'Low' : 'High';
+    tbody.innerHTML += `<tr>
+      <td>${t.date}</td><td>${t.city}</td><td>${mkt}</td><td>${t.nws || '—'}</td><td>${t.bucket}</td>
+      <td>${t.entry}¢</td><td>${t.exit != null ? t.exit + '¢' : '—'}</td>
+      <td>${t.size ? '$' + t.size : '—'}</td>
       <td class="${pc}">${pStr}</td>
       <td class="${oc}">${t.outcome.toUpperCase()}</td>
       <td><button class="del-btn" onclick="deleteTrade(${t.id})">✕</button></td>
     </tr>`;
   });
 }
-function updateStats(){
-  const t=getTrades().filter(x=>x.outcome!=='skip');
-  const wins=t.filter(x=>x.outcome==='win').length;
-  const losses=t.filter(x=>x.outcome==='loss').length;
-  const pnl=t.reduce((s,x)=>s+(x.pnl||0),0);
-  document.getElementById('s-total').textContent=t.length;
-  document.getElementById('s-wins').textContent=wins;
-  document.getElementById('s-losses').textContent=losses;
-  const el=document.getElementById('s-pnl');
-  el.textContent=`${pnl>=0?'+':''}$${pnl.toFixed(2)}`;
-  el.className='stat-value '+(pnl>0?'green':pnl<0?'red':'');
+
+function updateStats() {
+  const t      = getTrades().filter(x => x.outcome !== 'skip');
+  const wins   = t.filter(x => x.outcome === 'win').length;
+  const losses = t.filter(x => x.outcome === 'loss').length;
+  const pnl    = t.reduce((s, x) => s + (x.pnl || 0), 0);
+  document.getElementById('s-total').textContent  = t.length;
+  document.getElementById('s-wins').textContent   = wins;
+  document.getElementById('s-losses').textContent = losses;
+  const el = document.getElementById('s-pnl');
+  el.textContent  = `${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`;
+  el.className    = 'stat-value ' + (pnl > 0 ? 'green' : pnl < 0 ? 'red' : '');
 }
-function updateBadge(){document.getElementById('trade-count').textContent=getTrades().length;}
- 
-const now=new Date();
-document.getElementById('date-display').textContent=getDisplay(now);
-document.getElementById('f-date').value=now.toISOString().split('T')[0];
-renderCities(citiesMain,'cities-main');
-renderCities(citiesWest,'cities-west');
-renderCities(citiesCanada,'cities-canada');
+
+function updateBadge() {
+  document.getElementById('trade-count').textContent = getTrades().length;
+}
+
+// ── INIT ─────────────────────────────────────────────────
+const now = new Date();
+document.getElementById('date-display').textContent = getDisplay(now);
+document.getElementById('f-date').value = now.toISOString().split('T')[0];
+
+renderCities(citiesMain,   'cities-main');
+renderCities(citiesWest,   'cities-west');
+renderCities(citiesCanada, 'cities-canada');
 renderResults();
 renderYesterday();
 renderTrades();
 updateStats();
 updateBadge();
-document.getElementById('tab-count').textContent=`${allCities.length*4} tabs total`;
- 
-setInterval(()=>{
-  document.getElementById('clock').textContent=
-    new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
-},1000);
-document.getElementById('clock').textContent=
-  new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+
+// 5 links per city now (high + low + afd + hourly + windy)
+document.getElementById('tab-count').textContent = `${allCities.length * 5} tabs total`;
+
+setInterval(() => {
+  document.getElementById('clock').textContent =
+    new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+}, 1000);
+document.getElementById('clock').textContent =
+  new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
 </script>
 </body>
 </html>
